@@ -25,4 +25,3 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ]
 };
-Status API Training Shop Blog About
