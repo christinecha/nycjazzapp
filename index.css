@@ -1,0 +1,7 @@
+.day {
+  display: inline-block;
+  background-color: #fafafa;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+}
