@@ -51,7 +51,7 @@ class Listings extends React.Component {
       <div>
         <a href={ location.pathname }>
           <button className = "submitDate">
-            select another date
+            &lt;&lt; back
           </button>
         </a>
         { this.getShows() }

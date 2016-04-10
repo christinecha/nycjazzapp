@@ -13,12 +13,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js?$/,
-        loaders: ['react-hot', 'babel-loader?presets[]=react,presets[]=es2015'],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.jsx?$/,
-        loaders: ['react-hot', 'babel-loader?presets[]=react,presets[]=es2015'],
+        loaders: ['react-hot', 'babel-loader?presets[]=react,presets[]=es2015,presets[]=stage-0'],
         exclude: /node_modules/
       },
       { test: /\.css$/, loader: "style!css" }

@@ -1,44 +1,90 @@
 * {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
   text-decoration: none;
   font-family: "Montserrat", sans-serif;
   font-weight: 200;
   text-align: center;
-  color: #222;
+  color: #fefefe;
 }
 
-body { padding-top: 10px; padding-bottom: 50px; background-color: #fafafa; }
+*:focus { outline: none; }
 
-#react-app {
-  padding-top: 10px;
+body { padding-top: 10px; padding-bottom: 50px; background-color: #000; }
+
+#video-background {
+  position: fixed;
+  left: -300px;
+  top: -300px;
+  z-index: -2;
+  filter: blur(10px);
+  -webkit-filter: blur(8px);
+  -moz-filter: blur(8px);
+  -o-filter: blur(8px);
+}
+
+#video-background--overlay {
+  background-color: rgba(0,0,0,0.7);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.video-background--info {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+}
+
+.video-background--info:hover { text-decoration: underline; }
+
+
+.title {
+  color: rgba(255,255,255,0.7);
+  margin-top: 50px;
+  font-family: 'Playfair Display', sans-serif;
+  font-style: italic;
+  font-size: 60px;
+}
+
+.subtitle {
+  color: rgba(255,255,255,0.5);
+  font-family: 'Playfair Display', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
 }
 
 .dropdown {
   display: inline-block;
   width: 400px;
   max-width: 100%;
+  text-transform: lowercase;
 }
 
 .dropdown .selectedOption {
-  border-bottom: 3px solid #eee;
+  border-bottom: 2px solid #eee;
   padding: 10px;
   cursor: pointer;
-  font-size: 26px;
+  font-size: 20px;
+  letter-spacing: 0.1em;
   position: relative;
+  transition: all .2s;
 }
 
 .dropdown .selectedOption .caret {
   position: absolute;
-  top: 20px;
+  top: 15px;
   right: 15px;
-  font-size: 18px;
-  transform: scaleY(0.8);
-  -webkit-transform: scaleY(0.8);
-  -moz-transform: scaleY(0.8);
-  -o-transform: scaleY(0.8);
+  font-size: 14px;
+  transform: scaleY(0.75);
+  -webkit-transform: scaleY(0.75);
+  -moz-transform: scaleY(0.75);
+  -o-transform: scaleY(0.75);
 }
 
 .dropdown .options {
-  background-color: #eee;
   margin-top: 5px;
   padding: 10px 0;
   position: relative;
@@ -49,68 +95,102 @@ body { padding-top: 10px; padding-bottom: 50px; background-color: #fafafa; }
   position: absolute;
   top: 0;
   right: 5px;
+  font-size: 30px;
+  line-height: 20px;
+  font-family: 'Playfair Display', sans-serif;
+  font-style: italic;
   cursor: pointer;
+  color: rgba(255,255,255,0.3);
 }
 
 .dropdown .options--close:hover {
-  font-weight: bold;
+  color: rgba(255,255,255,0.8);
 }
 
 .dropdown .options .option {
   cursor: pointer;
-  padding: 5px;
+  padding: 10px;
+  height: 20px;
+  transition: 0.2s;
 }
 
 .calendar {
+  margin: 10px;
   padding: 10px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.calendar h4 {
+  font-size: 13px;
+  font-family: 'Playfair Display', sans-serif;
+  text-transform: uppercase;
+  padding-bottom: 10px;
 }
 
 .day {
   display: inline-block;
-  background-color: #fafafa;
+  background-color: rgba(0,0,0,0.8);
   width: 30px;
   height: 30px;
   margin: 5px;
   cursor: pointer;
   line-height: 30px;
+  vertical-align: middle;
 }
 
 .dropdown .options .option:hover,
 .day:hover {
-  background-color: #fff;
+  font-size: 120%;
 }
 
 .submitDate {
+  font-family: 'Playfair Display', sans-serif;
+  font-style: italic;
   margin-top: 20px;
-  background-color: #88aadd;
-  color: white;
+  background-color: transparent;
+  color: #FF5700;
   border: none;
   box-shadow: none;
   padding: 10px;
   width: 400px;
   max-width: 100%;
-  font-size: 22px;
+  font-size: 50px;
   cursor: pointer;
+  opacity: 0.6;
 }
 
 .submitDate:hover {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .show {
   padding: 20px;
-  background-color: #f1f1f2;
+  background-color: rgba(0,0,0,0.4);
   margin: 10px;
 }
 
 .show--title {
-  font-size: 22px;
+  color: rgba(255,255,255,0.8);
+  font-size: 20px;
+  font-family: 'Playfair Display', sans-serif;
+  letter-spacing: 0.03em;
+  font-style: italic;
   text-decoration: none;
-  color: #333;
+  transition: all 0.5s;
+  text-transform: capitalize;
 }
-.show--title:hover { font-size: 24px; }
-.show--venue { font-size: 18px; color: #aaa; }
-.show--date { font-size: 16px; text-transform: uppercase; }
+
+.show--title:hover { font-size: 22px; }
+.show--venue {
+  margin: 5px;
+  font-family: 'Playfair Display', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 14px;
+  color: #aaa;
+}
+.show--date { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; }
 
 
 #credits {

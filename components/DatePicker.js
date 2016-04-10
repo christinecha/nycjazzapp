@@ -43,6 +43,8 @@ class DatePicker extends React.Component {
 
     return (
       <div>
+        <h1 className="title">nyc jazz shows</h1>
+        <h2 className="subtitle">happening</h2>
         <Dropdown
           customOption   = { this.state.customOption }
           customValue    = { this.state.customValue }
