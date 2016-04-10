@@ -22,7 +22,7 @@ class Calendar extends React.Component {
           className="day"
           key={ i }
           onClick={ () => handleDateSelect(datetime) }>
-          { Datetime.getFormattedDate(datetime) }
+          { Datetime.getFormattedDate(datetime, "calendar") }
         </div>
       )
     }
@@ -49,7 +49,9 @@ class Calendar extends React.Component {
 
     return (
       <div className="calendar">
-        calendar:
+        <h4>
+          { Datetime.months[new Date().getMonth()] + " - " + Datetime.months[new Date().getMonth() + 1] }
+        </h4>
         { this.getWeeks() }
       </div>
     )

@@ -36,7 +36,9 @@ class Dropdown extends React.Component {
 
     let optionNodes = options.map((option, i) =>  {
       return (
-        <div onClick={ () => this.setOption(i) } key={ i }>
+        <div
+          className="option"
+          onClick={ () => this.setOption(i) } key={ i }>
           { option }
         </div>
       )
@@ -71,6 +73,8 @@ class Dropdown extends React.Component {
       selected: i,
       showOptions: !!customDisplays[i]
     })
+
+    this.props.updateValue(this.getSelectedValue())
   }
 
   showOptions(e) {
@@ -82,14 +86,13 @@ class Dropdown extends React.Component {
   render() {
     const { customDisplays, customOption, defaultOption, options } = this.props
 
-    console.log('selected: ', this.getSelectedValue())
-
     return (
       <div className="dropdown">
         <div
           className="selectedOption"
           onClick={ (e) => this.showOptions(e) }>
           { this.state.customOption || options[this.state.selected] || "select one" }
+          <div className="caret">&#9660;</div>
         </div>
         { this.getOptions() }
       </div>
