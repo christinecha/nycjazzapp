@@ -26,6 +26,10 @@ class VideoBackground extends React.Component {
     }
   }
 
+  muteVid(e) {
+    e.target.mute()
+  }
+
   getInfo(e) {
     console.log(e.target.getVideoData())
     this.setState({
@@ -52,6 +56,7 @@ class VideoBackground extends React.Component {
           videoId  = { this.state.videoId }
           id       = "video-background"
           opts     = {videoOptions}
+          onReady  = {(e) => this.muteVid(e)}
           onPlay   = {(e) => this.getInfo(e)} />
         <div id="video-background--overlay"></div>
         { this.displayInfo() }
