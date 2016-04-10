@@ -49,7 +49,7 @@ class Listings extends React.Component {
   render() {
     return (
       <div>
-        <a href={"/"}>
+        <a href={ location.pathname }>
           <button className = "submitDate">
             select another date
           </button>
