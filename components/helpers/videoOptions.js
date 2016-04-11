@@ -5,6 +5,12 @@ export const videos = [
   "b2Gu_SiJ60Y",
   "zIwREs0dN4Q",
   "XG-81iAjGEk",
+  "FCwPmHBtJrM",
+  "YwsqxZyNqa8",
+  "rcrFoWOYxr0",
+  "4somwYjj7e8",
+  "_5KJlS8pDSE",
+  "TcFoDw1BMHI"
 ]
 
 export const randomVid = () => {

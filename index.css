@@ -36,17 +36,22 @@ body { padding-top: 10px; padding-bottom: 50px; background-color: #000; }
 .video-background--info {
   font-size: 12px;
   letter-spacing: 0.2em;
+  max-width: 90%;
+  margin: 0 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-shadow: 0 0 5px rgba(0,0,0,0.8);
 }
 
 .video-background--info:hover { text-decoration: underline; }
-
 
 .title {
   color: rgba(255,255,255,0.7);
   margin-top: 50px;
   font-family: 'Playfair Display', sans-serif;
   font-style: italic;
-  font-size: 60px;
+  font-size: 55px;
 }
 
 .subtitle {
@@ -59,7 +64,7 @@ body { padding-top: 10px; padding-bottom: 50px; background-color: #000; }
 .dropdown {
   display: inline-block;
   width: 400px;
-  max-width: 100%;
+  max-width: 90%;
   text-transform: lowercase;
 }
 

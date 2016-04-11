@@ -13,7 +13,8 @@ let videoOptions = {
     loop: 1,
     start: 100,
     enablejsapi: 1,
-    showinfo: 0
+    showinfo: 0,
+    rel: 0
   }
 }
 
