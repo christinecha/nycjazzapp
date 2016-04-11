@@ -202,11 +202,15 @@ body { padding-top: 10px; padding-bottom: 50px; background-color: #000; }
   font-size: 11px;
   margin-top: 50px;
   padding: 30px 0;
+  letter-spacing: 0.1em;
+}
+
+#credits h4 {
   color: #616162;
 }
 
 #credits a {
-  color: #616162 !important;
+  color: #ccc !important;
 }
 
 #credits i {
