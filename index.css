@@ -210,11 +210,19 @@ body { padding-top: 10px; padding-bottom: 50px; background-color: #000; }
 }
 
 #credits a {
-  color: #ccc !important;
+  color: #ccc;
+}
+
+#credits a:hover {
+  color: #fff;
 }
 
 #credits i {
   font-size: 20px;
   margin: 3px;
-  color: #616162 !important;
+  color: #616162;
+}
+
+#credits i:hover {
+  color: #ccc;
 }
