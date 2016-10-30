@@ -16,7 +16,8 @@ module.exports = {
         loaders: ['react-hot', 'babel-loader?presets[]=react,presets[]=es2015,presets[]=stage-0'],
         exclude: /node_modules/
       },
-      { test: /\.css$/, loader: "style!css" }
+      { test: /\.css$/, loader: "style!css" },
+      { test: /\.json$/, loader: "json" }
     ],
   },
   plugins: [

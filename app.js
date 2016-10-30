@@ -2,20 +2,17 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import DatePicker from './components/DatePicker'
-import Listings from './components/Listings'
-import NoMatch from './components/NoMatch'
 import VideoBackground from './components/VideoBackground'
-import { getParamObj } from './components/helpers/parseURL'
+import NYCJazzApp from './components/NYCJazzApp'
 
-let View = getParamObj(location.href).getShows ? <Listings /> : <DatePicker />
+if (window.innerWidth > 375) {
+  ReactDOM.render(
+    <VideoBackground />,
+    document.getElementById("video-background--container")
+  )
+}
 
 ReactDOM.render(
-  <VideoBackground />,
-  document.getElementById("video-background--container")
-)
-
-ReactDOM.render(
-  View
+  <NYCJazzApp />
   , document.getElementById("react-app")
 )

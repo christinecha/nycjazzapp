@@ -1,46 +1,46 @@
 "use strict"
 
 import React from 'react'
-import * as Datetime from './helpers/datetime'
+import moment from 'moment-timezone'
+
 
 class Calendar extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      now: new Date()
-    }
   }
 
-  getDays(startDate) {
-    const { handleDateSelect } = this.props
+  getDays(startMoment) {
+    const { updateValue } = this.props
 
     let days = []
+
     for (let i = 0; i < 7; i++) {
-      let datetime = new Date(startDate + (Datetime.unixDay * i))
+      let datetime = moment(startMoment).add(i, 'days')
       days.push(
         <div
-          className="day"
           key={ i }
-          onClick={ () => handleDateSelect(datetime) }>
-          { Datetime.getFormattedDate(datetime, "calendar") }
+          className="day"
+          onClick={ () => updateValue(datetime.unix()) }>
+          { datetime.format('D') }
         </div>
       )
     }
+
     return days
   }
 
   getWeeks() {
-    const { now } = this.state
-    let lastSunday = Datetime.getLastSunday(now)
     let weeks = []
+
     for (let i = 0; i < 5; i ++) {
-      let startOfWeek = lastSunday.getTime() + (Datetime.unixWeek * i)
+      const startMoment = moment().startOf('week').add(i, 'weeks')
       weeks.push(
         <div key={ i } className="week">
-          { this.getDays(startOfWeek) }
+          { this.getDays(startMoment) }
         </div>
       )
     }
+
     return weeks
   }
 
@@ -50,7 +50,7 @@ class Calendar extends React.Component {
     return (
       <div className="calendar">
         <h4>
-          { Datetime.months[new Date().getMonth()] + " - " + Datetime.months[new Date().getMonth() + 1] }
+          { moment().startOf('week').format('MMM') + " - " + moment().startOf('week').add('1', 'month').format('MMM')}
         </h4>
         { this.getWeeks() }
       </div>

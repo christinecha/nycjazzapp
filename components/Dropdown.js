@@ -1,100 +1,64 @@
-"use strict"
-
 import React from 'react'
+import moment from 'moment-timezone'
+
+import Calendar from './Calendar'
+
 
 class Dropdown extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
-      customDisplay: null,
-      customOption: this.props.customOption || null,
-      customValue: this.props.customValue || null,
-      selected: this.props.defaultOption || null,
-      showOptions: false
+      showDatePicker: false
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps != this.props) {
-      this.setState({
-        customOption: this.props.customOption,
-        customValue: this.props.customValue
-      })
+  selectOption(val) {
+    if (val === 'Today' || val === 'Tomorrow') {
+      this.props.updateValue(val)
+      return
     }
+
+    this.setState({ showDatePicker: true })
   }
 
-  closeOptions(e) {
-    this.setState({
-      showOptions: false
-    })
+  updateCalendarValue(val) {
+    this.setState({ showDatePicker: false })
+    const datestring = moment.tz(val, 'X', 'America/New_York').format('ddd, MMM D')
+    this.props.updateValue(datestring)
   }
 
-  getOptions() {
-    if (!this.state.showOptions) return null
+  renderOptions() {
+    const options = this.state.showDatePicker ? this.props.options : this.props.options.concat(['Custom'])
 
-    const { customDisplays, options } = this.props
-
-    let optionNodes = options.map((option, i) =>  {
+    return options.map((val, i) => {
       return (
         <div
-          className="option"
-          onClick={ () => this.setOption(i) } key={ i }>
-          { option }
+          key={i}
+          className='option'
+          onClick={this.selectOption.bind(this, val)}
+        >
+          {val}
         </div>
       )
-    })
-
-    return (
-      <div className="options">
-        <div className="options--close" onClick={ (e) => this.closeOptions(e) }>X</div>
-        { optionNodes }
-        <div className="customDisplay">
-          { customDisplays[this.state.selected] }
-        </div>
-      </div>
-    )
-  }
-
-  getSelectedValue() {
-    const { options, values } = this.props
-    let selectorId = options[this.state.selected]
-
-    if (values && values[selectorId]) {
-      return values[selectorId]
-    } else {
-      return this.state.customValue || selectorId
-    }
-  }
-
-  setOption(i) {
-    const { customDisplays, customOption } = this.props
-    this.setState({
-      customOption: null,
-      selected: i,
-      showOptions: !!customDisplays[i]
-    }, () => {
-      this.props.updateValue(this.getSelectedValue())
-    })
-  }
-
-  showOptions(e) {
-    this.setState({
-      showOptions: !this.state.showOptions
     })
   }
 
   render() {
-    const { customDisplays, customOption, defaultOption, options } = this.props
+    const { showDropdown, toggleDropdown, value } = this.props
 
     return (
       <div className="dropdown">
         <div
           className="selectedOption"
-          onClick={ (e) => this.showOptions(e) }>
-          { this.state.customOption || options[this.state.selected] || "select one" }
-          <div className="caret">&#9660;</div>
+          onClick={ toggleDropdown }>
+          { value }
+          <span className="caret">&#9660;</span>
         </div>
-        { this.getOptions() }
+        <div className={`options ${showDropdown ? null : 'hidden'}`}>
+          { this.renderOptions() }
+          { this.state.showDatePicker && <Calendar updateValue={this.updateCalendarValue.bind(this)} /> }
+        </div>
       </div>
     )
   }
