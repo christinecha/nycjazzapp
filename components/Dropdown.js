@@ -72,9 +72,9 @@ class Dropdown extends React.Component {
       customOption: null,
       selected: i,
       showOptions: !!customDisplays[i]
+    }, () => {
+      this.props.updateValue(this.getSelectedValue())
     })
-
-    this.props.updateValue(this.getSelectedValue())
   }
 
   showOptions(e) {
