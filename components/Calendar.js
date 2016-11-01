@@ -50,7 +50,7 @@ class Calendar extends React.Component {
     return (
       <div className="calendar">
         <h4>
-          { moment().startOf('week').format('MMM') + " - " + moment().startOf('week').add('1', 'month').format('MMM')}
+          { moment().endOf('week').format('MMMM') }
         </h4>
         { this.getWeeks() }
       </div>

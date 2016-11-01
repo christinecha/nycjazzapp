@@ -170,20 +170,19 @@ body {
 .calendar {
   margin: 10px;
   padding: 10px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  background-color: rgba(0,0,0,0.4);
 }
 
 .calendar h4 {
-  font-size: 13px;
-  font-family: 'Playfair Display', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  font-family: 'Viga', sans-serif;
   text-transform: uppercase;
   padding-bottom: 10px;
 }
 
 .day {
   display: inline-block;
-  background-color: rgba(0,0,0,0.8);
   width: 30px;
   height: 30px;
   margin: 5px;
