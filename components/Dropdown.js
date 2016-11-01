@@ -48,14 +48,14 @@ class Dropdown extends React.Component {
     const { showDropdown, toggleDropdown, value } = this.props
 
     return (
-      <div className="dropdown">
+      <div className={`dropdown ${showDropdown ? '' : 'collapsed'}`}>
         <div
           className="selectedOption"
           onClick={ toggleDropdown }>
           { value }
           <span className="caret">&#9660;</span>
         </div>
-        <div className={`options ${showDropdown ? null : 'hidden'}`}>
+        <div className="options">
           { this.renderOptions() }
           { this.state.showDatePicker && <Calendar updateValue={this.updateCalendarValue.bind(this)} /> }
         </div>

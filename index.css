@@ -2,7 +2,7 @@
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   text-decoration: none;
-  font-family: 'Secular One', sans-serif;
+  font-family: 'Viga', sans-serif;
   text-rendering: optimizeLegibility;
   font-weight: 200;
   color: #fefefe;
@@ -67,10 +67,11 @@ body {
 
 .hero h1 {
   font-size: 28px;
-  font-weight: 100;
+  letter-spacing: 0.1em;
 }
 
 .hero h1 .jazz {
+  letter-spacing: 0.02em;
   font-size: 36px;
   font-family: 'Playfair Display', serif;
   font-style: italic;
@@ -101,6 +102,11 @@ body {
   max-width: 90%;
   text-transform: uppercase;
   overflow: hidden;
+  transition: all 0.4s ease-in-out;
+}
+
+.dropdown.collapsed {
+  height: 55px;
 }
 
 .dropdown .selectedOption {
@@ -119,7 +125,7 @@ body {
   position: absolute;
   top: 10px;
   right: 15px;
-  font-size: 14px;
+  font-size: 12px;
   transform: scaleY(0.75);
   -webkit-transform: scaleY(0.75);
   -moz-transform: scaleY(0.75);
@@ -129,14 +135,7 @@ body {
 .dropdown .options {
   margin-bottom: 10px;
   position: relative;
-  transition: all 0.4s ease-in-out;
-}
-
-.dropdown .options.hidden {
-  transform: translate3d(0, -50px, 0);
-  opacity: 0;
-  z-index: -1;
-  height: 0;
+  overflow: hidden;
 }
 
 .dropdown .options--close {
@@ -160,6 +159,12 @@ body {
   letter-spacing: 0.1em;
   cursor: pointer;
   padding: 5px;
+  transition: all 0.4s ease-in-out;
+}
+
+.dropdown.collapsed .options .option {
+  transform: translate3d(0, -50px, 0);
+  z-index: -1;
 }
 
 .calendar {
@@ -226,15 +231,15 @@ body {
   width: 60px;
   height: 60px;
   border-radius: 100%;
-  padding-top: 13px;
+  padding-top: 12px;
   box-sizing: border-box;
   display: inline-block;
   vertical-align: middle;
 }
 
 .show--hours {
-  font-weight: 400;
-  letter-spacing: 0.05em;
+  font-size: 13px;
+  letter-spacing: 0.1em;
 }
 
 .show--ampm {
@@ -255,8 +260,6 @@ body {
 .show--title {
   color: #fff;
   font-size: 14px;
-  font-family: 'Proxima Nova', sans-serif;
-  font-weight: 100;
   letter-spacing: 0.05em;
   text-decoration: none;
   transition: all 0.5s;
