@@ -5,27 +5,23 @@ import Firebase from 'firebase'
 import moment from 'moment-timezone'
 
 import Show from './Show'
-import Dropdown from './Dropdown'
 
 let ref = new Firebase('https://nycjazz.firebaseio.com/')
-
-const getMoment = (date) => {
-  if (date === 'Today') return moment().startOf('day')
-  if (date === 'Tomorrow') return moment().startOf('day').add(24, 'hours')
-
-  return moment.tz(date, 'ddd, MMM D', 'America/New_York')
-}
 
 
 class NYCJazzApp extends React.Component {
   constructor(props) {
     super(props)
 
+    const now = moment().tz('America/New_York').startOf('day').format('X')
+
     this.state = {
-      showDropdown: false,
-      shows: [],
-      date: 'Today'
+      allShows: {},
+      date: now.toString()
     }
+
+    this.handlePrev = this.handlePrev.bind(this)
+    this.handleNext = this.handleNext.bind(this)
   }
 
   componentDidMount() {
@@ -35,32 +31,42 @@ class NYCJazzApp extends React.Component {
   getShows() {
     const { date } = this.state
 
-    const startMoment = getMoment(date)
-    const endMoment = moment(startMoment).add(24, 'hours')
+    const yesterday = moment().subtract(1, 'days')
 
     ref.child('shows')
-      .orderByChild('startDateTime')
-      .startAt(startMoment.unix())
-      .endAt(endMoment.unix())
-      .once('value', (snapshot) => {
-        let shows = []
-        snapshot.forEach(child => {
-          shows.push(child.val())
-        })
+    .orderByChild('startDateTime')
+    .startAt(yesterday.unix())
+    .once('value', (snapshot) => {
+      let allShows = {}
 
-        this.setState({ shows })
+      snapshot.forEach(child => {
+        const show = child.val()
+        show.id = child.key
+
+        const day = moment(show.startDateTime, 'X').startOf('day').format('X')
+        if (!allShows[day]) allShows[day] = []
+        allShows[day].push(show)
       })
+
+      this.setState({ allShows })
+    })
   }
 
-  updateDate(date) {
-    this.setState({
-      date,
-      showDropdown: false
-    }, this.getShows.bind(this))
+  handlePrev() {
+    const newDate = moment(this.state.date, 'X').subtract(1, 'days')
+    this.setState({ date: newDate.unix() })
+  }
+
+  handleNext() {
+    const newDate = moment(this.state.date, 'X').add(1, 'days')
+    this.setState({ date: newDate.unix() })
   }
 
   renderShows() {
-    return this.state.shows.map((show, i) => {
+    const { date, allShows } = this.state
+    const selectedShows = allShows[date.toString()] || []
+
+    return selectedShows.map((show, i) => {
       return (
         <Show
           key      = {i}
@@ -74,27 +80,23 @@ class NYCJazzApp extends React.Component {
   }
 
   render() {
+    const dateMoment = moment(this.state.date, 'X').tz('America/New_York')
+    const formattedDate = dateMoment.format('dddd, MMMM D, YYYY')
+    const isYesterday = dateMoment.diff(moment(), 'days') === -1
+
     return (
-      <div>
-        <div className='hero'>
-          <h1>NYC<span className='jazz'>jazz</span></h1>
-          <Dropdown
-            showDropdown   = { this.state.showDropdown}
-            toggleDropdown = { () => this.setState({ showDropdown: !this.state.showDropdown} )}
-            value          = { this.state.date }
-            options        = { ['Today', 'Tomorrow'] }
-            updateValue    = { date => this.updateDate(date) }
-          />
+      <div className="react-app-content">
+        <h1><span className="red">NYC</span> JAZZ SHOWS</h1>
+        <div className="datepicker">
+          {!isYesterday && <div className="arrow-prev" onClick={this.handlePrev}></div>}
+          <div className="date">{formattedDate}</div>
+          <div className="arrow-next" onClick={this.handleNext}></div>
         </div>
 
         <div className='shows'>
           { this.renderShows() }
         </div>
-
-        <div id="credits">
-          <h4>CREATED BY <a href="http://christinecha.com">  CHRISTINE CHA</a></h4>
-       </div>
-      </div>
+     </div>
     )
   }
 }
